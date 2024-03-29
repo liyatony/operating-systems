@@ -1,0 +1,43 @@
+#include<stdio.h>
+#include<math.h>
+#include<stdlib.h>
+
+void main()
+{
+int i,j,n,head,seek=0,temp,maxcyl;
+printf("enter head position");
+scanf("%d",&head);
+printf("enter no of reference strings");
+scanf("%d",&n);
+printf("enter maximum the size of cylinder");
+scanf("%d",&maxcyl);
+maxcyl=maxcyl-1;
+int str[n];
+printf("enter the reference strings");
+for(i=0;i<n;i++)
+{
+scanf("%d",&str[i]);
+}
+for(i=0;i<n;i++)
+{
+for(j=0;j<n-i-1;j++)
+{
+if(str[j]>str[j+1])
+{
+temp=str[j];
+str[j]=str[j+1];
+str[j+1]=temp;
+}
+}
+}
+for(i=0;i<n;i++)
+{
+if(str[i]<head)
+{
+temp=str[i];
+}
+}
+seek=(maxcyl-head)+maxcyl+temp;
+printf("seek time is %d ",seek);
+}
+
