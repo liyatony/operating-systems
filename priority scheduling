@@ -1,0 +1,66 @@
+#include<stdio.h>
+struct schedule
+{
+ int p,bt,priority,tat,wt,ct;
+};
+void main()
+{
+  int n,cct=0,a[10],k=0,i,j;
+  double sumtat=0,sumwt=0;
+        printf("enter the number of processes ");
+        scanf("%d",&n);
+        struct schedule p[n];
+        for(i=0;i<n;i++)
+        {
+                printf("enter burst time of P%d  ",i);
+                scanf("%d",&p[i].bt);
+                printf("enter priority of P%d  ",i);
+                scanf("%d",&p[i].priority);
+                p[i].p=i;
+        }
+        for(i=0;i<n;i++)
+        {
+                for(j=0;j<n-i-1;j++)
+                {
+                        if(p[j].priority>p[j+1].priority)
+                        {       
+                                struct schedule temp=p[j];
+                                p[j]=p[j+1];
+                                p[j+1]=temp;
+                        }
+                }
+        }
+        printf("\n");
+        printf("GANTT CHART\n");
+        printf("--------------------------------------------\n|");
+        for(i=0;i<n;i++)
+        {
+                printf("P%d\t|",p[i].p);
+                cct+=p[i].bt;
+                p[i].ct=cct;
+                p[i].tat=p[i].ct;
+                p[i].wt=p[i].tat-p[i].bt;
+        }
+        printf("\n-------------------------------------------\n");
+        printf("0\t");
+        for(i=0;i<n;i++)
+        {
+                printf("%d\t",p[i].ct);
+        }
+        printf("\nProcess\tBT\tTAT\tWT\n");
+        for(i=0;i<n;i++)
+        {
+                printf("P%d\t%d\t%d\t%d\n",i,p[i].bt,p[i].tat,p[i].wt);
+        }
+        for(i=0;i<n;i++)
+        {
+                sumtat+=p[i].tat;
+                sumwt+=p[i].wt;
+        }
+        printf("\nTotal Turnaround time : %f",sumtat);
+        printf("\nTotal Waiting time : %f",sumwt);
+        printf("\nAverage Turnaround time : %f",sumtat/n);
+        printf("\nAverage Waiting time : %f",sumwt/n);
+                
+}
+
