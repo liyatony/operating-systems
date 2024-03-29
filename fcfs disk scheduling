@@ -1,0 +1,31 @@
+#include<stdio.h>
+#include<math.h>
+#include<stdlib.h>
+ void main()
+ {
+ int i,n,head;
+  printf("enter the head position");
+ scanf("%d",&head);
+ printf("enter the no.of request string");
+ scanf("%d",&n);
+ int str[n];
+ printf("enter request string");
+ for(i=0;i<n;i++)
+ {
+ scanf("%d",&str[i]);
+ }
+ int seek=0,seek_time=0;
+ seek=head-str[0];
+ 
+ seek_time+=abs(seek);
+ 
+ printf("movement from head %d to %d is %d",head,str[0],abs(seek));
+ for(i=1;i<n;i++)
+ {
+ seek=str[i]-str[i-1];
+ 
+ seek_time+=abs(seek);
+ printf("\nmovement from head %d to %d is %d",str[i-1],str[i],seek);
+ }
+ printf("\nSeek time :  %d",seek_time);
+ }
