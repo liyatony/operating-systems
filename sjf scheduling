@@ -1,0 +1,76 @@
+#include<stdio.h>
+struct process{
+int bt,ct,tat,wt,p;
+};
+void main()
+{
+int n,i,j,cct=0;float sumt=0.0,sumw=0.0,avgtat=0.0,avgw=0.0;
+printf("enter no of process");
+scanf("%d",&n);
+struct process pr[n];
+printf("enter burst time of process");
+for(i=0;i<n;i++)
+{
+scanf("%d",&pr[i].bt);
+pr[i].p=i;
+}
+for(i=0;i<n;i++)
+{
+for(j=0;j<n-i-1;j++)
+{
+struct process temp;
+if(pr[j].bt>pr[j+1].bt)
+{
+temp=pr[j];
+pr[j]=pr[j+1];
+pr[j+1]=temp;
+}
+}
+}
+for(i=0;i<n;i++)
+{
+cct=cct+pr[i].bt;
+pr[i].ct=cct;
+}
+for(i=0;i<n;i++)
+{
+pr[i].tat=pr[i].ct;
+}
+for(i=0;i<n;i++)
+{
+pr[i].wt=pr[i].tat-pr[i].bt;
+}
+for(i=0;i<n;i++)
+{
+sumt+=pr[i].tat;
+sumw+=pr[i].wt;
+}
+avgtat=sumt/n;
+avgw=sumw/n;
+printf("\nGantt chart");
+printf("\n");
+for(i=0;i<n;i++)
+{
+printf("|\tP%d",i);
+
+}
+printf("\n------------------------------------------------------------------\n");
+printf("0\t");
+for(i=0;i<n;i++)
+{
+
+
+printf("%d\t\t",pr[i].ct);
+}
+printf("\nProcess\tBT\tTt\tWT");
+for(i=0;i<n;i++)
+{
+printf("\nP%d\t%d\t%d\t%d",pr[i].p,pr[i].bt,pr[i].tat,pr[i].wt);
+}
+avgtat=sumt/n;
+avgw=sumw/n;
+printf("\nTotal turnaroundtime is %f ms ",sumt);
+printf("\nTotal waiting time is %f ms ",sumw);
+printf("\naverage turnaround time is %f",avgtat);
+printf("\naverage waiting time is %f ms",avgw);
+}
