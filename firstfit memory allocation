@@ -1,0 +1,43 @@
+#include<stdio.h>
+#include<stdlib.h>
+void main()
+{
+int n1,n2;
+printf("Enter the number of blocks");
+scanf("%d",&n1);
+printf("Enter number of job");
+scanf("%d",&n2);
+int block[n1],job[n2],i,j,vis[n2];
+printf("Enter the size of blocks");
+for(i=0;i<n1;i++){
+scanf("%d",&block[i]);
+}
+printf("enter size of jobs");
+for(i=0;i<n2;i++)
+{
+vis[i]=0;
+scanf("%d",&job[i]);
+}
+for(i=0;i<n2;i++)
+{
+for(j=0;j<n1;j++)
+{
+if(block[j]>=job[i])
+{
+vis[i]=block[j];
+block[j]=block[j]-job[i];
+break;
+}
+}
+}
+printf("Status of allocation");
+for(i=0;i<n2;i++)
+{
+if(vis[i]==0)
+{
+printf("%d is waiting",job[i]);
+}
+else
+printf("\n%d is inserted to to the block %d",job[i],vis[i]);
+}
+}
