@@ -1,0 +1,63 @@
+#include<stdio.h>
+#include<stdlib.h>
+int mutex=1,full=0,n,x=0;
+int empty;
+int wait(int s)
+{
+return(--s);
+}
+int signal(int s)
+{
+return (++s);
+}
+void produce()
+{
+empty=wait(empty);
+mutex=wait(mutex);
+full=signal(full);
+x++; 
+printf("\nProducer produces item %d",x);
+mutex=signal(mutex);
+}
+void consume()
+{
+full=wait(full);
+mutex=wait(mutex);
+printf("\nConsumer consumes item %d",x);
+x--;
+mutex=signal(mutex);
+empty=signal(empty);
+}
+void main()
+{
+printf("Enter the no.of empty slots in buffer");
+scanf("%d",&empty);
+while(1)
+{
+int choice;
+printf("\n1.Producer\t2.Consumer\t3.Exit");
+printf("\nEnter your choice");
+scanf("%d",&choice);
+switch(choice)
+{
+case 1:
+if((mutex==1)&&(empty!=0))
+produce();
+else
+printf("\nBuffer is full");
+break;
+case 2:
+if((mutex==1)&&(full!=0))
+consume();
+else
+printf("\nBuffer is empty ");
+break;
+case 3 :
+exit(0);
+break;
+default:
+printf("\nwrong choice!!");
+}
+}
+}
+ 
