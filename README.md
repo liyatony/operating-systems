@@ -8,7 +8,7 @@ This repository contains implementations of various algorithms and concepts rela
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
-- [License](#license)
+
 
 ## Features
 - Banker's Algorithm
@@ -30,7 +30,7 @@ This repository contains implementations of various algorithms and concepts rela
 ## Usage
 Compile and run any C file using:
 
-    ```bash
+   
      gcc filename.c -o output
     ./output
 Replace filename.c with the name of the C file you wish to run.
